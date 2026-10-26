@@ -15,13 +15,13 @@ export default class Player{
         this.times = times
     }
     recordTime(start, end){
-        this.times.push(end-start)
+        this.times.push((end-start)/1000)
     }
     showStats(){
     let sum =0 
     this.times.forEach(time => {
         sum+= time
     }); 
-    console.log(`Total time: ${sum} milisec, average time: ${sum/this.times.length} milisec`)
+    console.log(`Total time: ${sum} sec, average time: ${sum/this.times.length} sec`)
     }
 }

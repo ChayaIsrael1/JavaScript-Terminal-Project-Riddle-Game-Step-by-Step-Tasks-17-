@@ -10,5 +10,6 @@ name: "Easy Math",
 difficulty: "hard",
 taskDescription: "What is 6*10",
 correctAnswer: "60",
-choices: "1)53 2)60 3)7 4)15" 
+choices: "1)53 2)60 3)7 4)15" ,
+timeLimit: "5"
 };

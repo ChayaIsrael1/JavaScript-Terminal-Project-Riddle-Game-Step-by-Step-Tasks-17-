@@ -9,5 +9,6 @@ id: 4,
 name: "Easy Math",
 difficulty: "medium",
 taskDescription: "What is 6*6",
-correctAnswer: "36"
+correctAnswer: "36",
+timeLimit: "5"
 };

@@ -9,5 +9,6 @@ id: 3,
 name: "Easy Math",
 difficulty: "medium",
 taskDescription: "What is 2*2",
-correctAnswer: "4"
+correctAnswer: "4",
+timeLimit: "5"
 };

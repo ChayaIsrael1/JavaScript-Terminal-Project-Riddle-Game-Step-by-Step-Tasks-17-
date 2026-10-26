@@ -10,5 +10,6 @@ name: "Easy Math",
 difficulty: "medium",
 taskDescription: "What is 6*2",
 correctAnswer: "12",
-choices: "1)8 2)6 3)12 4)15" 
+choices: "1)8 2)6 3)12 4)15",
+timeLimit: "5" 
 };

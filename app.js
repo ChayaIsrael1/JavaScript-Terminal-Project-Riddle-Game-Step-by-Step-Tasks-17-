@@ -35,8 +35,10 @@ if (choice !=1 )
     for(let i = 0; i<filterAllRiddles.length;i++){
     const startTime = Date.now()
     const R = new Riddle(filterAllRiddles[i])
-    R.ask(prompt)
-    const endTime = Date.now()
+    const addTime=R.ask(prompt, startTime)
+    let endTime = Date.now()
+    if (addTime)
+    {endTime+=addTime}
     p1.recordTime(startTime,endTime)
 }}
 else {
@@ -47,8 +49,10 @@ else {
     for(let i = 0; i<filterAllRiddles.length;i++){
     const startTime = Date.now()
     const R = new MultipleChoiceRiddle(filterAllRiddles[i])
-    R.ask(prompt)
-    const endTime = Date.now()
+    const addTime= R.ask(prompt, startTime)
+    let endTime = Date.now()
+    if (addTime)
+    {endTime=endTime + addTime*1000}
     p1.recordTime(startTime,endTime)
 }
 }

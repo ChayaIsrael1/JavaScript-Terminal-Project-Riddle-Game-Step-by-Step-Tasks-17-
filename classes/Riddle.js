@@ -18,13 +18,18 @@ export default class Riddle {
         this.difficulty = obj.difficulty
         this.taskDescription = obj.taskDescription
         this.correctAnswer = obj.correctAnswer
+        this.timeLimit = obj.timeLimit
     }
-    ask(prompt) {
+    ask(prompt, start) {
         let correct = false
+        let timeLimitOver = 0
         while (!correct) {
             console.log(`${this.id} : ${this.name}
         ${this.taskDescription}`)
             const answer = prompt('Enter your answer..');
+            if ((Date.now() - start)/1000>this.timeLimit && timeLimitOver==0)
+            {    console.log(`Too slow! ${this.timeLimit} seconds penalty applied.`);
+                timeLimitOver= this.timeLimit}
             if (answer == this.correctAnswer) {
                 correct = true
                 console.log("---Current answer---")
@@ -33,5 +38,6 @@ export default class Riddle {
                 console.log("---Worng answer---")
             }
         }
+    return timeLimitOver
     }
 }
