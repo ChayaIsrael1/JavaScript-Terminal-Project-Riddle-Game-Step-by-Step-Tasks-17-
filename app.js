@@ -25,23 +25,35 @@ const p1 = new Player(myName, times)
 console.log(`Hello ${myName} ,your user is ready`);
 const choice = prompt(`To play game with choices enter 1, to play the regular game enter any other char`);
 const level = prompt('Choose difficulty: easy / medium / hard: ');
-
-    const filterAllRiddles = AllRiddles.filter((riddle)=>{
-    if (riddle.difficulty == level)
-    {return true}
+let filterAllRiddles
+if (level != "easy" && level != "medium" && level != "hard") {
+    console.log("All levels")
+    filterAllRiddles = AllRiddles
+}
+else {
+    filterAllRiddles = AllRiddles.filter((riddle) => {
+        if (riddle.difficulty == level) { return true }
     })
-    for(let i = 0; i<filterAllRiddles.length;i++){
+}
+filterAllRiddles=shuffle(filterAllRiddles)
+for (let i = 0; i < filterAllRiddles.length; i++) {
     const startTime = Date.now()
     let R
-    if (choice ==1 )  
-    {R = new MultipleChoiceRiddle(filterAllRiddles[i])}
-    else
-    {R = new Riddle(filterAllRiddles[i])}
-    const addTime=R.ask(prompt, startTime)
+    if (choice == 1) { R = new MultipleChoiceRiddle(filterAllRiddles[i]) }
+    else { R = new Riddle(filterAllRiddles[i]) }
+    const addTime = R.ask(prompt, startTime)
     let endTime = Date.now()
-    if (addTime)
-    {endTime=endTime+addTime*1000}
-    p1.recordTime(startTime,endTime)
+    if (addTime) { endTime = endTime + addTime * 1000 }
+    p1.recordTime(startTime, endTime)
 }
 
 p1.showStats()
+
+
+function shuffle(array) {
+  for (let i = array.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+        [array[i], array[j]] = [array[j], array[i]];
+  }
+  return array;
+}
