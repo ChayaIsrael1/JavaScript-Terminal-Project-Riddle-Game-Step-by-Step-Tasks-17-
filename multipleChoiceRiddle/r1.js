@@ -1,0 +1,13 @@
+// Riddle number 1.
+// Export a riddle object as the default export, with these properties:
+// - id (number)
+// - name (string)
+// - taskDescription (string, the riddle text shown to the player)
+// - correctAnswer (string)
+export default {
+id: 1,
+name: "Easy Math",
+taskDescription: "What is 5 + 3?",
+correctAnswer: "8",
+choices: "1)8 2)6 3)12 4)15" 
+};
