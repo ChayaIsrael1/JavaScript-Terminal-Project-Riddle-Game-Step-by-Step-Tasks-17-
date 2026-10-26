@@ -8,11 +8,15 @@ export default class MultipleChoiceRiddle extends Riddle{
     ask(prompt, start) {
         let correct = false
         let timeLimitOver = 0
+        let usehint = 0  
         while (!correct) {
         console.log(`${this.id} : ${this.name}
         ${this.taskDescription}
         the options: ${this.choices}`)
-            const answer = prompt('Enter your answer..');
+            const answer = prompt('Enter your answer.. for hint press H (that will add time to your )');
+            if (answer=="H" && usehint==0)
+            {    console.log(`The hint: ${this.hint}. seconds penalty applied.`);
+                usehint= 10}
             if (((Date.now() - start)/1000)>=this.timeLimit && timeLimitOver==0)
             {    console.log(`Too slow! ${this.timeLimit} seconds penalty applied.`);
                 timeLimitOver= this.timeLimit}
@@ -24,7 +28,7 @@ export default class MultipleChoiceRiddle extends Riddle{
                 console.log("---Worng answer---")
             }
         }
-    return timeLimitOver
+    return timeLimitOver+usehint
     }
 
 }

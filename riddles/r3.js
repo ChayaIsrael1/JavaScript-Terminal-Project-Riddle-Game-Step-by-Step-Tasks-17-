@@ -10,5 +10,7 @@ name: "Easy Math",
 difficulty: "medium",
 taskDescription: "What is 2*2",
 correctAnswer: "4",
-timeLimit: "5"
+choices: "1)5 2)4 3)12 4)15" ,
+timeLimit: 5,
+hint: 4
 };

@@ -17,8 +17,6 @@ import AllRiddles from './riddles/index.js';
 import Player from './classes/Player.js'
 import Riddle from './classes/Riddle.js'
 import MultipleChoiceRiddle from './classes/MultipleChoiceRiddle.js';
-import AllRiddles1 from './multipleChoiceRiddle/index.js'
-
 
 console.log("Welcome to our game")
 const myName = prompt(`What is your name?`);
@@ -27,33 +25,23 @@ const p1 = new Player(myName, times)
 console.log(`Hello ${myName} ,your user is ready`);
 const choice = prompt(`To play game with choices enter 1, to play the regular game enter any other char`);
 const level = prompt('Choose difficulty: easy / medium / hard: ');
-if (choice !=1 )
-{   const filterAllRiddles = AllRiddles.filter((riddle)=>{
+
+    const filterAllRiddles = AllRiddles.filter((riddle)=>{
     if (riddle.difficulty == level)
     {return true}
     })
     for(let i = 0; i<filterAllRiddles.length;i++){
     const startTime = Date.now()
-    const R = new Riddle(filterAllRiddles[i])
+    let R
+    if (choice ==1 )  
+    {R = new MultipleChoiceRiddle(filterAllRiddles[i])}
+    else
+    {R = new Riddle(filterAllRiddles[i])}
     const addTime=R.ask(prompt, startTime)
     let endTime = Date.now()
     if (addTime)
-    {endTime+=addTime}
-    p1.recordTime(startTime,endTime)
-}}
-else {
-    const filterAllRiddles = AllRiddles1.filter((riddle)=>{
-    if (riddle.difficulty == level)
-    {return true}
-    })
-    for(let i = 0; i<filterAllRiddles.length;i++){
-    const startTime = Date.now()
-    const R = new MultipleChoiceRiddle(filterAllRiddles[i])
-    const addTime= R.ask(prompt, startTime)
-    let endTime = Date.now()
-    if (addTime)
-    {endTime=endTime + addTime*1000}
+    {endTime=endTime+addTime*1000}
     p1.recordTime(startTime,endTime)
 }
-}
+
 p1.showStats()

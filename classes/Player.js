@@ -15,7 +15,7 @@ export default class Player{
         this.times = times
     }
     recordTime(start, end){
-        this.times.push((end-start)/1000)
+        this.times.push((end/1000-start/1000))
     }
     showStats(){
     let sum =0 

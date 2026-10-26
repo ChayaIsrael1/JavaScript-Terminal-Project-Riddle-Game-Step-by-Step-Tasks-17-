@@ -10,5 +10,7 @@ name: "Easy Math",
 difficulty: "medium",
 taskDescription: "What is 6*6",
 correctAnswer: "36",
-timeLimit: "5"
+choices: "1)53 2)36 3)7 4)15",
+timeLimit: 5,
+hint: 36
 };
