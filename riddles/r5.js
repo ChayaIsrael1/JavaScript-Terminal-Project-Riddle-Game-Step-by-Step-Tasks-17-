@@ -7,6 +7,7 @@
 export default {
 id: 5,
 name: "Easy Math",
+difficulty: "hard",
 taskDescription: "What is 6*10",
 correctAnswer: "60"
 };

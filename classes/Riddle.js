@@ -15,6 +15,7 @@ export default class Riddle {
     constructor(obj) {
         this.id = obj.id
         this.name = obj.name
+        this.difficulty = obj.difficulty
         this.taskDescription = obj.taskDescription
         this.correctAnswer = obj.correctAnswer
     }

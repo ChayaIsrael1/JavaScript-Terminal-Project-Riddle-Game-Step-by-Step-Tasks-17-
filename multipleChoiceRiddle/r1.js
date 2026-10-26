@@ -7,6 +7,7 @@
 export default {
 id: 1,
 name: "Easy Math",
+difficulty: "easy",
 taskDescription: "What is 5 + 3?",
 correctAnswer: "8",
 choices: "1)8 2)6 3)12 4)15" 

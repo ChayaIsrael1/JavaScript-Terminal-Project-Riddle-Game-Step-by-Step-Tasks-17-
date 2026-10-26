@@ -26,18 +26,27 @@ const times = []
 const p1 = new Player(myName, times)
 console.log(`Hello ${myName} ,your user is ready`);
 const choice = prompt(`To play game with choices enter 1, to play the regular game enter any other char`);
+const level = prompt('Choose difficulty: easy / medium / hard: ');
 if (choice !=1 )
-{for(let i = 0; i<AllRiddles.length;i++){
+{   const filterAllRiddles = AllRiddles.filter((riddle)=>{
+    if (riddle.difficulty == level)
+    {return true}
+    })
+    for(let i = 0; i<filterAllRiddles.length;i++){
     const startTime = Date.now()
-    const R = new Riddle(AllRiddles[i])
+    const R = new Riddle(filterAllRiddles[i])
     R.ask(prompt)
     const endTime = Date.now()
     p1.recordTime(startTime,endTime)
 }}
 else {
-    for(let i = 0; i<AllRiddles1.length;i++){
+    const filterAllRiddles = AllRiddles1.filter((riddle)=>{
+    if (riddle.difficulty == level)
+    {return true}
+    })
+    for(let i = 0; i<filterAllRiddles.length;i++){
     const startTime = Date.now()
-    const R = new MultipleChoiceRiddle(AllRiddles1[i])
+    const R = new MultipleChoiceRiddle(filterAllRiddles[i])
     R.ask(prompt)
     const endTime = Date.now()
     p1.recordTime(startTime,endTime)
