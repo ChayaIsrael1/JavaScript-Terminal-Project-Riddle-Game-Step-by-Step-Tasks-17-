@@ -14,12 +14,10 @@
 export default class Riddle {
     constructor(obj) {
         this.id = obj.id
-        this.name = obj.name
-        this.difficulty = obj.difficulty
-        this.taskDescription = obj.taskDescription
+        this.name =  String(obj.name)
+        this.taskDescription = String(obj.taskDescription)
         this.correctAnswer = obj.correctAnswer
-        this.timeLimit = obj.timeLimit
-        this.hint = obj.hint
+        this.difficulty = obj.difficulty || "easy"; 
     }
     ask(prompt, start) {
         let correct = false

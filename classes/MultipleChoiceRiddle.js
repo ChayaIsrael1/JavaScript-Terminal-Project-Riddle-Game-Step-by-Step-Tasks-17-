@@ -3,7 +3,10 @@ import Riddle from './Riddle.js';
 export default class MultipleChoiceRiddle extends Riddle{
     constructor(obj){
         super(obj)
-        this.choices = obj.choices;  
+        this.choices = obj.choices;
+        this.difficulty = obj.difficulty
+        this.timeLimit = obj.timeLimit
+        this.hint = obj.hint  
     }
     ask(prompt, start) {
         let correct = false

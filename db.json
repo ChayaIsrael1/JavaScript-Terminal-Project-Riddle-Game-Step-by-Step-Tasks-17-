@@ -1,0 +1,116 @@
+{
+  "posts": [
+    {
+      "id": 1,
+      "title": "json-server",
+      "author": "typicode"
+    }
+  ],
+  "comments": [
+    {
+      "id": 1,
+      "body": "some comment",
+      "postId": 1
+    }
+  ],
+  "profile": {
+    "name": "typicode"
+  },
+  "riddles": [
+    {
+      "id": 1,
+      "name": "Easy Math",
+      "difficulty": "easy",
+      "taskDescription": "What is 5 + 3?",
+      "correctAnswer": "8",
+      "choices": "1)8 2)6 3)12 4)15",
+      "timeLimit": 5,
+      "hint": "8"
+    },
+    {
+      "id": 2,
+      "name": "Easy Math",
+      "difficulty": "medium",
+      "taskDescription": "What is 6 * 2?",
+      "correctAnswer": "12",
+      "choices": "1)8 2)6 3)12 4)15",
+      "timeLimit": 5,
+      "hint": "12"
+    },
+    {
+      "id": 3,
+      "name": "Easy Math",
+      "difficulty": "medium",
+      "taskDescription": "What is 2 * 2?",
+      "correctAnswer": "4",
+      "choices": "1)5 2)4 3)12 4)15",
+      "timeLimit": 5,
+      "hint": "4"
+    },
+    {
+      "id": 4,
+      "name": "Easy Math",
+      "difficulty": "medium",
+      "taskDescription": "What is 6 * 6?",
+      "correctAnswer": "36",
+      "choices": "1)53 2)36 3)7 4)15",
+      "timeLimit": 5,
+      "hint": "36"
+    },
+    {
+      "id": 5,
+      "name": "Easy Math",
+      "difficulty": "hard",
+      "taskDescription": "What is 6 * 10?",
+      "correctAnswer": "60",
+      "choices": "1)53 2)60 3)7 4)15",
+      "timeLimit": 5,
+      "hint": "60"
+    },
+    {
+      "name": "easy math",
+      "taskDescription": "4+9",
+      "correctAnswer": "13",
+      "difficulty": "easy",
+      "id": 10
+    }
+  ],
+  "players": [
+    {
+      "id": 1,
+      "name": "Yishai",
+      "lowestTime": 72
+    },
+    {
+      "id": 2,
+      "name": "Sarah",
+      "lowestTime": 65
+    },
+    {
+      "id": 3,
+      "name": "chaya",
+      "times": [
+        3.249000072479248,
+        2.6399998664855957,
+        2.680000066757202,
+        1.6570000648498535,
+        5.21399998664856,
+        3.427000045776367,
+        3.9860000610351562,
+        2.2269999980926514,
+        3.9509999752044678,
+        3.9040000438690186
+      ],
+      "lowestTime": 1.6570000648498535
+    },
+    {
+      "id": 4,
+      "name": "lea",
+      "times": [
+        3.2229998111724854,
+        2.2210001945495605
+      ],
+      "lowestTime": 2.2210001945495605
+    }
+  ]
+}
