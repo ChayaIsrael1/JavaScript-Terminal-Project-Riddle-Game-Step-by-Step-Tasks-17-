@@ -2,7 +2,7 @@ import Riddle from '../classes/Riddle.js'
 
 export async function getAllRiddles() {
     try {
-        const response = await fetch("http://localhost:3000/riddles")
+        const response = await fetch("http://localhost:3000/api/riddles")
         
         if (!response.ok) {
             throw new Error(`Failed to fetch riddles. Status: ${response.status}`);
@@ -20,7 +20,7 @@ export async function getAllRiddles() {
 export async function createRiddle(riddle) {
     const r = new Riddle(riddle)
     try {
-        const response = await fetch("http://localhost:3000/riddles", {
+        const response = await fetch("http://localhost:3000/api/riddles", {
             method: "POST",
             headers: {
                 "Content-Type": "application/json"
@@ -33,7 +33,7 @@ export async function createRiddle(riddle) {
         }
 
         const data = await response.json()
-        console.log("Riddle saved!")
+        console.log("Riddle saved!", data)
         return data
     }
     catch (error) {
@@ -44,7 +44,7 @@ export async function createRiddle(riddle) {
 export async function updateRiddle(id, riddle) {
     const r = new Riddle(riddle)
     try {
-        const response = await fetch(`http://localhost:3000/riddles/${id}`, {
+        const response = await fetch(`http://localhost:3000/api/riddles/${id}`, {
             method: "PUT", 
             headers: {
                 "Content-Type": "application/json"
@@ -68,7 +68,7 @@ export async function updateRiddle(id, riddle) {
 
 export async function deleteRiddle(id) {
     try {
-        const response = await fetch(`http://localhost:3000/riddles/${id}`, {
+        const response = await fetch(`http://localhost:3000/api/riddles/${id}`, {
             method: "DELETE",
             headers: {
                 "Content-Type": "application/json"

@@ -96,6 +96,10 @@ Choose = prompt(`What do you want to do?
         case "4":
             {
                 const id = prompt('enter id please:')
+                if (!id || isNaN(id)) {
+                    console.log("❌ Invalid ID! Please enter a valid number.");
+                    break;
+                }
                 const name = prompt('enter name please:')
                 const taskDescription = prompt('Enter description:')
                 const correctAnswer = prompt('Enter correct answer:')
@@ -147,7 +151,7 @@ async function game(player) {
 try{
     filterAllRiddles = await riddlesApi.getAllRiddles()
     trys++
-    if (filterAllRiddlesundefined)
+    if (filterAllRiddles  !== undefined)
     server = true
 }
 catch (error){console.log('error, try again')}    }

@@ -333,3 +333,151 @@ New record! Time updated.
 - "Time to beat" shown before playing.
 - The player's best time updated after playing.
 - A leaderboard sorted by best time.
+
+---
+
+# Part 3: Server Refactor with Express
+
+Until now json-server was the database server. In Part 3 you write **your own server with Express** and stop using json-server.
+
+The game in the terminal becomes the **client**: it shows the menu, asks the player for input, and sends HTTP requests with `fetch`, exactly like in Part 2. The **server** gets the requests, reads and writes the database file, and sends back JSON.
+
+The database stays the same `db.json` from Part 2, with the `riddles` and `players` arrays. Only the server that reads it changes.
+
+```
+Client (app.js)  --fetch-->  Express server (server.js)  -->  routes (riddles.js / players.js)  -->  read / write db.json
+       ^                                                                                                    |
+       +----------------------------------------- JSON response -----------------------------------------+
+```
+
+## Getting started (Part 3)
+
+1. Stop json-server (`Ctrl + C` in its terminal) and remove it:
+
+```
+npm uninstall json-server
+```
+
+2. Install Express:
+
+```
+npm install express
+```
+
+3. Change the scripts in `package.json`:
+
+```json
+"scripts": {
+  "server": "node server/server.js",
+  "start": "node client/app.js"
+}
+```
+
+4. Open **two terminals**, like in Part 2:
+   - Terminal 1: `npm run server` (keep it open, this is your server).
+   - Terminal 2: `npm start` (the game).
+
+5. Check that the server works: open http://localhost:3000/api/riddles in the browser. You should see your riddles as JSON.
+
+## New folder structure
+
+Move the files into two folders, `client` and `server`. The folder structure is optional, but the tasks below use it.
+
+```
+riddle-game/
+├── package.json
+├── client/
+│   ├── app.js              <- the terminal menu, sends HTTP requests
+│   ├── api/
+│   │   ├── riddlesApi.js
+│   │   └── playersApi.js
+│   └── classes/
+│       ├── Riddle.js
+│       └── Player.js
+└── server/
+    ├── server.js           <- the Express server
+    ├── routes/
+    │   ├── riddles.js
+    │   └── players.js
+    └── db/
+        ├── db.json         <- moved here from Part 2 (riddles + players)
+        └── dbHelpers.js    <- readDb() and writeDb()
+```
+
+Move `app.js`, `api/` and `classes/` together into `client/`, so the imports inside them keep working.
+
+## The server API
+
+Your server must answer these requests. All addresses start with `/api`.
+
+| Method | Endpoint | Description |
+| --- | --- | --- |
+| GET | `/api/riddles` | Get all riddles |
+| GET | `/api/riddles/:id` | Get one riddle by ID (404 if it does not exist) |
+| POST | `/api/riddles` | Add a new riddle (the server creates the `id`) |
+| PUT | `/api/riddles/:id` | Update a riddle by ID (404 if it does not exist) |
+| DELETE | `/api/riddles/:id` | Delete a riddle by ID (404 if it does not exist) |
+| GET | `/api/players` | Get all players |
+| GET | `/api/players?name=Yishai` | Find players by name (returns an array) |
+| POST | `/api/players` | Add a new player (`lowestTime: null`) |
+| PUT | `/api/players/:id` | Update the player's best time |
+
+These are the same requests json-server answered in Part 2, with `/api` at the start. That is why the client almost does not change.
+
+## Tasks
+
+### Server side
+
+**Task 19: Create the Express app** (`server/server.js`)
+
+- Create the app with `express()`.
+- Add `app.use(express.json())`, so the server can read the JSON body of POST and PUT requests.
+- Connect the routers: `/api/riddles` to `routes/riddles.js` and `/api/players` to `routes/players.js`.
+- Listen on port `3000` and print `Server is running on http://localhost:3000`.
+
+**Task 20: Read and write the database** (`server/db/dbHelpers.js`)
+
+- Write and export two `async` functions with `fs.promises` (`import fs from 'fs/promises'`):
+  - `readDb()` - reads `db.json` and returns the object (`JSON.parse`).
+  - `writeDb(db)` - saves the object back to `db.json` (`JSON.stringify(db, null, 2)`).
+- The routes always read the whole file, change the right array (`db.riddles` or `db.players`), and write the whole file back.
+
+**Task 21: Riddles routes** (`server/routes/riddles.js`)
+
+- Create a router with `express.Router()` and export it.
+- Add a route for every riddles row in the table above.
+- `req.params.id` is a string, so convert it with `Number()` before you compare it to `id`.
+- POST: the new `id` is the biggest `id` in the array + 1. Answer with status `201` and the new riddle.
+- PUT and DELETE: if there is no riddle with this `id`, answer with status `404` and `{ "error": "Riddle not found" }`.
+
+**Task 22: Players routes** (`server/routes/players.js`)
+
+- Create a router with `express.Router()` and export it.
+- GET `/`: if there is a `name` in the query (`req.query.name`), return only the players with that name. Otherwise return all players.
+- POST `/`: add `{ id, name, lowestTime: null }`, answer with status `201` and the new player.
+- PUT `/:id`: save the player's new `lowestTime`, or answer `404` if the player does not exist.
+
+### Client side
+
+**Task 23: Connect the client to your server** (`client/api/riddlesApi.js`, `client/api/playersApi.js`)
+
+- Change the addresses:
+  - `http://localhost:3000/riddles` → `http://localhost:3000/api/riddles`
+  - `http://localhost:3000/players` → `http://localhost:3000/api/players`
+- The rest of the client stays the same: the menu, the game, and the `fetch` calls with `res.ok` checks.
+- Check every menu option again: play, create, read, update, delete, and the leaderboard.
+
+### Bonus (optional)
+
+**Task 24: Validation on the server**
+
+- POST and PUT `/api/riddles`: if `name`, `taskDescription` or `correctAnswer` is missing, answer with status `400` and `{ "error": "..." }`, and do not save.
+- POST `/api/players`: if `name` is missing, answer with status `400`.
+
+## Part 3 deliverables
+
+- json-server is removed, and an Express server runs with `npm run server`.
+- `client/` and `server/` folders.
+- All the routes in the table above, reading and writing `db.json` with `fs.promises`.
+- `404` answers for an ID that does not exist.
+- The client works exactly like in Part 2, only through your own server.

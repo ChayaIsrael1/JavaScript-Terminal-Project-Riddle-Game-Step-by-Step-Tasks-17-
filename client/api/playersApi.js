@@ -2,7 +2,7 @@ import Player from '../classes/Player.js'
 
 export async function findPlayerByName(name) {
     try {
-        const response = await fetch(`http://localhost:3000/players?name=${name}`)
+        const response = await fetch(`http://localhost:3000/api/players?name=${name}`)
         if (!response.ok) {
             throw new Error(`Failed to find Player. Status: ${response.status}`);
         }
@@ -18,7 +18,7 @@ export async function findPlayerByName(name) {
 export async function createPlayer(name) {
   const p = new Player({ name: name, times: [], lowestTime: null });
 try {
-        const response = await fetch(`http://localhost:3000/players`, {
+        const response = await fetch(`http://localhost:3000/api/players`, {
             method: "POST",
             headers: {
                 "Content-Type": "application/json"
@@ -43,7 +43,7 @@ try {
 export async function updatePlayer(id,player) {
 const p =new Player(player)
 try {
-        const response = await fetch(`http://localhost:3000/players/${id}`, {
+        const response = await fetch(`http://localhost:3000/api/players/${id}`, {
             method: "PUT",
             headers: {
                 "Content-Type": "application/json"
@@ -65,7 +65,7 @@ try {
 }
 export async function getAllPlayers() {
  try {
-        const response = await fetch("http://localhost:3000/players")
+        const response = await fetch("http://localhost:3000/api/players")
         
         if (!response.ok) {
             throw new Error(`Failed to getAllPlayers. Status: ${response.status}`);
