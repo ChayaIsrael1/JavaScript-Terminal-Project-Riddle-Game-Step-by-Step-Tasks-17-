@@ -39,6 +39,7 @@ Choose = prompt(`What do you want to do?
                 const myName = prompt(`What is your name?`);
                 let p = await playersApi.findPlayerByName(myName)
                 let min = 0
+                console.log()
                 if (p != null){
                     if (p.times.length != 0) {
                         min = Math.min(...p.times)
